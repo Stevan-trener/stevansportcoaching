@@ -525,6 +525,7 @@
      zum Start zurück, wo sie bleiben. Die Buchstaben schlagen dabei eine sanfte Welle (CSS). */
   if (hero && !ruhig) {
     var slogan = hero.querySelector(".slogan");
+    document.documentElement.classList.add("animiraj");
     slogan.classList.add("slogan--geteilt");
     var schwimmer = Array.prototype.map.call(hero.querySelectorAll(".slogan__text"), function (el, nr) {
       /* Buchstaben einzeln verpacken; der Vorleser liest das aria-label der Überschrift */
