@@ -28,7 +28,7 @@
 <link rel="preload" href="../fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../fonts/archivo-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../css/style.css?v=10">
-<script src="../js/main.js?v=8" defer></script>
+<script src="../js/main.js?v=9" defer></script>
 </head>
 <body>
 <a class="skip" href="#inhalt">Preskoči na sadržaj</a>
@@ -76,6 +76,7 @@
     </div>
     <form class="formular" novalidate data-endpoint="/api/contact">
       <input type="hidden" name="lang" value="sr">
+      <input type="hidden" name="t" value="">
       <div class="feld-paar">
         <div class="feld"><label for="f-name">Ime i prezime</label><input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="f-name-fehler"><span class="feld__fehler" id="f-name-fehler" aria-live="polite"></span></div>
         <div class="feld"><label for="f-email">E-mail adresa</label><input id="f-email" name="email" type="email" autocomplete="email" required aria-describedby="f-email-fehler"><span class="feld__fehler" id="f-email-fehler" aria-live="polite"></span></div>

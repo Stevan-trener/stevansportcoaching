@@ -1,6 +1,7 @@
 (function () {
   "use strict";
 
+  var seiteGeladen = Date.now();
   var de = document.documentElement.lang !== "sr";
 
   /* Mobiles Menü */
@@ -33,20 +34,21 @@
   /* Anfrageformular */
   var form = document.querySelector("form.formular");
   if (form) {
+    if (form.elements.t) form.elements.t.value = String(seiteGeladen);
     var status = form.querySelector(".formular__status");
     var texte = de ? {
       name: "Bitte geben Sie Ihren Namen an.",
       email: "Bitte geben Sie eine gültige E-Mail-Adresse an.",
       programm: "Bitte wählen Sie ein Programm aus.",
       zustimmung: "Bitte bestätigen Sie die Datenschutzhinweise.",
-      gesendet: "Danke! Ihre Anfrage ist angekommen. Sie erhalten in Kürze eine persönliche Antwort.",
+      gesendet: "Danke! Ihre Anfrage ist angekommen. Eine Bestätigung wurde an Ihre E-Mail-Adresse gesendet. Sie erhalten in Kürze eine persönliche Antwort.",
       fehler: "Die Anfrage konnte nicht gesendet werden. Bitte schreiben Sie direkt per E-Mail oder WhatsApp."
     } : {
       name: "Molimo unesite ime.",
       email: "Molimo unesite ispravnu e-mail adresu.",
       programm: "Molimo izaberite program.",
       zustimmung: "Molimo potvrdite napomenu o zaštiti podataka.",
-      gesendet: "Hvala! Upit je stigao. Uskoro ćete dobiti lični odgovor.",
+      gesendet: "Hvala! Upit je stigao. Potvrda je poslata na vašu e-mail adresu. Uskoro ćete dobiti lični odgovor.",
       fehler: "Upit nije poslat. Pišite direktno e-mailom ili preko WhatsApp-a."
     };
 
@@ -86,7 +88,12 @@
         body: new URLSearchParams(new FormData(form)),
         headers: { Accept: "application/json", "Content-Type": "application/x-www-form-urlencoded" }
       })
-        .then(function (r) { if (!r.ok) throw new Error(r.status); form.reset(); zeige(texte.gesendet); })
+        .then(function (r) {
+          if (!r.ok) throw new Error(r.status);
+          form.reset();
+          if (form.elements.t) form.elements.t.value = String(seiteGeladen);
+          zeige(texte.gesendet);
+        })
         .catch(function () { zeige(texte.fehler); })
         .then(function () {
           if (!senden) return;
