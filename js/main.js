@@ -40,18 +40,14 @@
       programm: "Bitte wählen Sie ein Programm aus.",
       zustimmung: "Bitte bestätigen Sie die Datenschutzhinweise.",
       gesendet: "Danke! Ihre Anfrage ist angekommen. Sie erhalten in Kürze eine persönliche Antwort.",
-      mail: "Ihr E-Mail-Programm öffnet sich mit der vorbereiteten Anfrage. Bitte senden Sie die Nachricht dort ab.",
-      fehler: "Die Anfrage konnte nicht gesendet werden. Bitte schreiben Sie direkt per E-Mail oder WhatsApp.",
-      betreff: "Anfrage über die Website"
+      fehler: "Die Anfrage konnte nicht gesendet werden. Bitte schreiben Sie direkt per E-Mail oder WhatsApp."
     } : {
       name: "Molimo unesite ime.",
       email: "Molimo unesite ispravnu e-mail adresu.",
       programm: "Molimo izaberite program.",
       zustimmung: "Molimo potvrdite napomenu o zaštiti podataka.",
       gesendet: "Hvala! Upit je stigao. Uskoro ćete dobiti lični odgovor.",
-      mail: "Otvara se vaš e-mail program sa pripremljenim upitom. Molimo pošaljite poruku odatle.",
-      fehler: "Upit nije poslat. Pišite direktno e-mailom ili preko WhatsApp-a.",
-      betreff: "Upit sa sajta"
+      fehler: "Upit nije poslat. Pišite direktno e-mailom ili preko WhatsApp-a."
     };
 
     var markiere = function (feld, meldung) {
@@ -78,39 +74,25 @@
 
       var zeige = function (text) { status.textContent = text; status.hidden = false; status.focus(); };
       var ziel = form.getAttribute("data-endpoint");
+      if (!ziel) { zeige(texte.fehler); return; }
 
-      if (ziel) {
-        var senden = form.querySelector('[type="submit"]');
-        if (senden) {
-          senden.disabled = true;
-          senden.setAttribute("aria-busy", "true");
-        }
-        fetch(ziel, {
-          method: "POST",
-          body: new URLSearchParams(new FormData(form)),
-          headers: { Accept: "application/json", "Content-Type": "application/x-www-form-urlencoded" }
-        })
-          .then(function (r) { if (!r.ok) throw new Error(r.status); form.reset(); zeige(texte.gesendet); })
-          .catch(function () { zeige(texte.fehler); })
-          .then(function () {
-            if (!senden) return;
-            senden.disabled = false;
-            senden.removeAttribute("aria-busy");
-          });
-        return;
+      var senden = form.querySelector('[type="submit"]');
+      if (senden) {
+        senden.disabled = true;
+        senden.setAttribute("aria-busy", "true");
       }
-
-      var text = [
-        "Name: " + f.name.value.trim(),
-        "E-Mail: " + f.email.value.trim(),
-        "Telefon: " + (f.telefon.value.trim() || "-"),
-        (de ? "Programm: " : "Program: ") + f.programm.options[f.programm.selectedIndex].text,
-        "",
-        f.nachricht.value.trim()
-      ].join("\n");
-      location.href = "mailto:" + form.getAttribute("data-mail") +
-        "?subject=" + encodeURIComponent(texte.betreff) + "&body=" + encodeURIComponent(text);
-      zeige(texte.mail);
+      fetch(ziel, {
+        method: "POST",
+        body: new URLSearchParams(new FormData(form)),
+        headers: { Accept: "application/json", "Content-Type": "application/x-www-form-urlencoded" }
+      })
+        .then(function (r) { if (!r.ok) throw new Error(r.status); form.reset(); zeige(texte.gesendet); })
+        .catch(function () { zeige(texte.fehler); })
+        .then(function () {
+          if (!senden) return;
+          senden.disabled = false;
+          senden.removeAttribute("aria-busy");
+        });
     });
 
     form.addEventListener("input", function (e) {
