@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://stevansportcoaching.de/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="de" href="https://stevansportcoaching.de/"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://stevansportcoaching.de/sr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stevansportcoaching.de/"/>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://stevansportcoaching.de/sr/</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="de" href="https://stevansportcoaching.de/"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://stevansportcoaching.de/sr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stevansportcoaching.de/"/>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://stevansportcoaching.de/ueber-mich.html</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="de" href="https://stevansportcoaching.de/ueber-mich.html"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://stevansportcoaching.de/sr/o-meni.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stevansportcoaching.de/ueber-mich.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://stevansportcoaching.de/sr/o-meni.html</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="de" href="https://stevansportcoaching.de/ueber-mich.html"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://stevansportcoaching.de/sr/o-meni.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stevansportcoaching.de/ueber-mich.html"/>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://stevansportcoaching.de/leistungen.html</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="de" href="https://stevansportcoaching.de/leistungen.html"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://stevansportcoaching.de/sr/usluge.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stevansportcoaching.de/leistungen.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://stevansportcoaching.de/sr/usluge.html</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="de" href="https://stevansportcoaching.de/leistungen.html"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://stevansportcoaching.de/sr/usluge.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stevansportcoaching.de/leistungen.html"/>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://stevansportcoaching.de/galerie.html</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="de" href="https://stevansportcoaching.de/galerie.html"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://stevansportcoaching.de/sr/galerija.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stevansportcoaching.de/galerie.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://stevansportcoaching.de/sr/galerija.html</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="de" href="https://stevansportcoaching.de/galerie.html"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://stevansportcoaching.de/sr/galerija.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stevansportcoaching.de/galerie.html"/>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://stevansportcoaching.de/kontakt.html</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="de" href="https://stevansportcoaching.de/kontakt.html"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://stevansportcoaching.de/sr/kontakt.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stevansportcoaching.de/kontakt.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://stevansportcoaching.de/sr/kontakt.html</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="de" href="https://stevansportcoaching.de/kontakt.html"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://stevansportcoaching.de/sr/kontakt.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stevansportcoaching.de/kontakt.html"/>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://stevansportcoaching.de/impressum.html</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="de" href="https://stevansportcoaching.de/impressum.html"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://stevansportcoaching.de/sr/impressum.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stevansportcoaching.de/impressum.html"/>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://stevansportcoaching.de/sr/impressum.html</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="de" href="https://stevansportcoaching.de/impressum.html"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://stevansportcoaching.de/sr/impressum.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stevansportcoaching.de/impressum.html"/>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://stevansportcoaching.de/datenschutz.html</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="de" href="https://stevansportcoaching.de/datenschutz.html"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://stevansportcoaching.de/sr/zastita-podataka.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stevansportcoaching.de/datenschutz.html"/>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://stevansportcoaching.de/sr/zastita-podataka.html</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="de" href="https://stevansportcoaching.de/datenschutz.html"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://stevansportcoaching.de/sr/zastita-podataka.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stevansportcoaching.de/datenschutz.html"/>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://stevansportcoaching.de/teilnahmebedingungen.html</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="de" href="https://stevansportcoaching.de/teilnahmebedingungen.html"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://stevansportcoaching.de/sr/uslovi-prijave.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stevansportcoaching.de/teilnahmebedingungen.html"/>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://stevansportcoaching.de/sr/uslovi-prijave.html</loc>
+    <lastmod>2026-11-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="de" href="https://stevansportcoaching.de/teilnahmebedingungen.html"/>
+    <xhtml:link rel="alternate" hreflang="sr" href="https://stevansportcoaching.de/sr/uslovi-prijave.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stevansportcoaching.de/teilnahmebedingungen.html"/>
+    <priority>0.2</priority>
+  </url>
+</urlset>

@@ -1,0 +1,819 @@
+/* Stevan Sport Coaching — Ingolstadt */
+
+@font-face {
+  font-family: "Archivo";
+  src: url("../fonts/archivo-latin.woff2") format("woff2");
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  font-display: block;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Archivo";
+  src: url("../fonts/archivo-latin-ext.woff2") format("woff2");
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  font-display: block;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+:root {
+  --tiefe: #102a43;
+  --sport: #1677b8;
+  --sport-dunkel: #0f5f94;
+  --wasser: #28b8bf;
+  --fliese: #f5f8fa;
+  --tinte: #172b3a;
+  --grau: #4d6275;
+  --linie: #d7e2ea;
+  --weiss: #ffffff;
+
+  --breite: 76rem;
+  --rand: clamp(1rem, 4vw, 2.5rem);
+  --abstand: clamp(4rem, 9vw, 7.5rem);
+  --radius: 6px;
+
+  --schrift: "Archivo", "Helvetica Neue", Arial, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  margin: 0;
+  background: var(--weiss);
+  color: var(--tinte);
+  font-family: var(--schrift);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  font-stretch: 100%;
+  overflow-x: hidden;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+a { color: var(--sport-dunkel); text-underline-offset: 0.18em; }
+a:hover { color: var(--tiefe); }
+
+:focus-visible {
+  outline: 3px solid var(--wasser);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+h1, h2, h3 {
+  margin: 0;
+  color: var(--tiefe);
+  font-stretch: 75%;
+  font-weight: 760;
+  line-height: 1.04;
+  letter-spacing: -0.005em;
+  text-wrap: balance;
+}
+h2 { font-size: clamp(2rem, 4.4vw, 3.4rem); }
+h3 { font-size: clamp(1.4rem, 2.2vw, 1.75rem); line-height: 1.12; }
+p { margin: 0 0 1em; }
+p:last-child { margin-bottom: 0; }
+
+.skip {
+  position: absolute; left: -999px; top: 0.5rem;
+  background: var(--tiefe); color: var(--weiss); padding: 0.6rem 1rem; z-index: 100;
+}
+.skip:focus { left: 0.5rem; }
+
+.wrap {
+  width: 100%;
+  max-width: var(--breite);
+  margin-inline: auto;
+  padding-inline: var(--rand);
+}
+
+.lead {
+  font-size: clamp(1.125rem, 1.6vw, 1.3rem);
+  line-height: 1.55;
+  color: var(--grau);
+  max-width: 38em;
+}
+
+/* ---------- Bahnleine (Leinen-Motiv) ---------- */
+
+.leine {
+  height: 12px;
+  /* Schwimmkörper einer Wettkampf-Leine von oben: Zylinder mit Glanz, kleine Fugen dazwischen
+     (Ersatz ohne JS; sonst zeichnet main.js die Leinen mit roten Enden) */
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.38), rgba(255,255,255,0.32) 28%, rgba(255,255,255,0.06) 50%, rgba(0,0,0,0.45)),
+    #dcecf7;
+  -webkit-mask: repeating-linear-gradient(90deg, #000 0 12.4px, transparent 12.4px 14px);
+          mask: repeating-linear-gradient(90deg, #000 0 12.4px, transparent 12.4px 14px);
+  border-radius: 3.5px;
+}
+.leine--fein { height: 8px; -webkit-mask-size: 10px 8px; mask-size: 10px 8px; opacity: 0.9; }
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+  min-height: 3.25rem;
+  padding: 0.85rem 1.5rem;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 650;
+  font-size: 1rem;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+.btn svg { width: 1.25rem; height: 1.25rem; flex: none; }
+.btn--primaer { background: var(--sport); color: var(--weiss); }
+.btn--primaer:hover { background: var(--sport-dunkel); color: var(--weiss); }
+.btn--wasser { background: var(--wasser); color: var(--tiefe); }
+.btn--wasser:hover { background: var(--weiss); color: var(--tiefe); }
+.btn--linie { border-color: currentColor; color: var(--tiefe); background: transparent; }
+.btn--linie:hover { background: var(--tiefe); color: var(--weiss); border-color: var(--tiefe); }
+.btn--hell { border-color: rgba(255,255,255,0.55); color: var(--weiss); background: transparent; }
+.btn--hell:hover { background: var(--weiss); color: var(--tiefe); border-color: var(--weiss); }
+
+.btn-reihe { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+/* ---------- Kopfzeile ---------- */
+
+.kopf {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--tiefe);
+  color: var(--weiss);
+}
+.kopf__innen {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  min-height: 4.375rem;
+}
+.marke {
+  display: flex; flex-direction: column;
+  color: var(--weiss); text-decoration: none;
+  line-height: 1;
+}
+.marke:hover { color: var(--weiss); }
+.marke__name { font-stretch: 62%; font-weight: 850; font-size: 1.6rem; letter-spacing: 0.02em; }
+.marke__zusatz { font-size: 0.8rem; font-weight: 500; color: #b6c8d6; margin-top: 0.2rem; }
+.marke__punkte { display: flex; justify-content: space-between; margin-top: 0.4rem; }
+.kopf .marke { padding-block: 0.5rem; }
+.marke__punkte i { width: 5px; height: 5px; border-radius: 50%; background: var(--wasser); }
+/* Kurze Welle über die Punkte beim Öffnen der Seite */
+.kopf .marke__punkte i { animation: welle 0.9s ease-in-out calc(0.35s + var(--i) * 0.05s) 2 both; }
+@keyframes welle {
+  0%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-3px); }
+  65% { transform: translateY(1.5px); }
+}
+
+.nav { display: flex; align-items: center; gap: 0.25rem; }
+.nav__liste { display: flex; gap: 0.1rem; list-style: none; margin: 0; padding: 0; }
+.nav__liste a {
+  display: block; padding: 0.55rem 0.7rem;
+  color: #dbe6ee; text-decoration: none; font-size: 0.95rem; font-weight: 500;
+  border-radius: 4px;
+}
+.nav__liste a:hover { color: var(--weiss); background: rgba(255,255,255,0.08); }
+.nav__liste a[aria-current="page"] { color: var(--weiss); box-shadow: inset 0 -3px 0 var(--wasser); border-radius: 0; }
+.sprache {
+  display: flex; margin-left: 0.5rem; border: 1px solid rgba(255,255,255,0.3); border-radius: 999px; overflow: hidden;
+}
+.sprache a, .sprache span {
+  padding: 0.3rem 0.65rem; font-size: 0.82rem; font-weight: 650; text-decoration: none; color: #b6c8d6;
+}
+.sprache span { background: var(--weiss); color: var(--tiefe); }
+.sprache a:hover { color: var(--weiss); }
+.kopf .btn { min-height: 2.6rem; padding: 0.5rem 1.1rem; font-size: 0.95rem; margin-left: 0.5rem; }
+
+.menue-knopf {
+  display: none;
+  background: none; border: 0; color: var(--weiss); padding: 0.5rem; margin-right: -0.5rem; cursor: pointer;
+}
+.menue-knopf svg { width: 28px; height: 28px; }
+
+@media (max-width: 1060px) {
+  .menue-knopf { display: block; }
+  .nav {
+    position: fixed; inset: 4.375rem 0 0 0;
+    flex-direction: column; align-items: stretch; gap: 1.25rem;
+    padding: 1.5rem var(--rand) 2rem;
+    background: var(--tiefe);
+    overflow-y: auto;
+    visibility: hidden; opacity: 0; transform: translateY(-8px);
+    transition: opacity 0.2s, transform 0.2s, visibility 0s 0.2s;
+  }
+  .nav.offen { visibility: visible; opacity: 1; transform: none; transition: opacity 0.2s, transform 0.2s; }
+  .nav__liste { flex-direction: column; }
+  .nav__liste a { font-size: 1.35rem; font-stretch: 75%; font-weight: 650; padding: 0.7rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); border-radius: 0; }
+  .nav__liste a[aria-current="page"] { box-shadow: none; color: var(--wasser); }
+  .sprache { align-self: flex-start; margin: 0; }
+  .kopf .btn { margin: 0; min-height: 3.25rem; }
+  body.menue-offen { overflow: hidden; }
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  position: relative;
+  /* Wasser statt Foto: tiefes Blau, nach unten etwas heller wie ein Becken */
+  background: linear-gradient(180deg, var(--tiefe) 0%, #123a5e 100%);
+  color: var(--weiss);
+  overflow: hidden;
+}
+.hero__raster {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  /* Hero füllt den ersten Bildschirm bis zur Unterkante, ohne weißen Streifen darunter */
+  min-height: calc(100vh - 4.375rem);
+  min-height: calc(100svh - 4.375rem);
+}
+.hero__text {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: clamp(2.5rem, 6vw, 5rem) 0 clamp(2.5rem, 6vw, 5rem);
+  padding-left: max(var(--rand), calc((100vw - var(--breite)) / 2 + var(--rand)));
+  padding-right: clamp(1.5rem, 4vw, 3.5rem);
+}
+.hero__ort { color: #9fd9dc; font-weight: 600; font-size: 1rem; margin-bottom: 1.25rem; }
+
+.slogan { margin: 0 0 1.75rem; color: var(--weiss); font-weight: inherit; font-stretch: inherit; }
+.slogan__bahn {
+  position: relative;
+  display: block;
+  padding: 0.16em 0 0.2em;
+  font-stretch: 62%;
+  font-weight: 850;
+  font-size: clamp(3rem, 7.4vw, 6.4rem);
+  line-height: 0.92;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+.slogan__bahn:nth-child(2) { color: #bfe9eb; }
+.slogan__bahn:nth-child(3) { color: var(--wasser); }
+
+/* Leinen von der linken bis zur rechten Beckenwand — genau dort, wo main.js sie später auf das Canvas zeichnet,
+   damit beim Laden nichts springt. --innen = linker Rand des Inhalts (wie padding-left von .hero__text) */
+.hero { --innen: max(var(--rand), calc((100vw - var(--breite)) / 2 + var(--rand))); --innen-r: clamp(1.5rem, 4vw, 3.5rem); }
+.slogan__bahn::after,
+.slogan__bahn:first-child::before {
+  content: "";
+  position: absolute; left: -9px; right: calc(var(--innen) - var(--innen-r) - 3px); bottom: -6px; height: 12px;
+  /* Schwimmkörper von oben: Glanz, je fünf rote vor den Wänden, jeder zehnte blau (wie im Canvas).
+     Raster ab -100vw wie in main.js (Start der Leine), daher die Verschiebung um 9px - 100vw + 0.8px */
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.38), rgba(255,255,255,0.32) 28%, rgba(255,255,255,0.06) 50%, rgba(0,0,0,0.45)),
+    linear-gradient(90deg, #d7363c 0 72px, transparent 72px calc(100% - 72px), #d7363c calc(100% - 72px)),
+    linear-gradient(90deg, #1677b8 0 14px, #7fb6dc 14px 28px, transparent 28px) calc(9.8px - 100vw) 0 / 140px 100% repeat-x,
+    #dcecf7;
+  -webkit-mask: linear-gradient(90deg, #000 0 12.4px, transparent 12.4px) calc(9.8px - 100vw) 0 / 14px 100% repeat-x;
+          mask: linear-gradient(90deg, #000 0 12.4px, transparent 12.4px) calc(9.8px - 100vw) 0 / 14px 100% repeat-x;
+  border-radius: 3.5px;
+  pointer-events: none;
+}
+@media (max-width: 860px) { .hero { --innen-r: var(--rand); } }
+.slogan__bahn:first-child::before { top: -6px; bottom: auto; }
+/* main.js zeichnet die Leinen auf ein Canvas: farbig wie im Wettkampfbecken, und mit der Maus schlagen sie Wellen */
+.hero__leinen { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.hero__becken { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+/* Plivač u donjem desnom uglu bazena, pliva prema zidu */
+.hero__plivac {
+  position: absolute; z-index: 1; pointer-events: none;
+  /* približno realna veličina u odnosu na stazu (razmak traka ≈ 2,5 m), za nijansu uvećan */
+  width: clamp(100px, 9.4vw, 140px); height: auto;
+  right: calc(max(var(--rand), calc((100vw - var(--breite)) / 2 + var(--rand))) + 70px);
+  bottom: 72px;
+}
+@media (max-width: 860px) { .hero__plivac { display: none; } }
+.hero--leinwand .slogan__bahn::after,
+.hero--leinwand .slogan__bahn:first-child::before { visibility: hidden; }
+
+.hero__kurz { max-width: 30rem; color: #d3e0ea; font-size: clamp(1.05rem, 1.4vw, 1.2rem); margin-bottom: 2rem; }
+
+
+@media (prefers-reduced-motion: no-preference) {
+  .slogan__text { display: block; animation: bahn-rein 0.6s cubic-bezier(.2,.7,.2,1) both; }
+  .slogan__bahn:nth-child(1) .slogan__text { animation-delay: 0.1s; }
+  .slogan__bahn:nth-child(2) .slogan__text { animation-delay: 0.2s; }
+  .slogan__bahn:nth-child(3) .slogan__text { animation-delay: 0.3s; }
+}
+@keyframes bahn-rein { from { opacity: 0; transform: translateX(-0.4em); } to { opacity: 1; transform: none; } }
+/* Schwimmende Wörter (main.js): eine Welle läuft vom Kopf zum Ende des Wortes, wie beim Kraulen */
+.slogan__zeichen { display: inline-block; }
+.slogan--geteilt .slogan__text { white-space: nowrap; display: inline-block; vertical-align: top; }
+.slogan--schwimmt .slogan__zeichen { animation: kraul 1.4s ease-in-out calc(var(--n) * -0.1s) infinite; }
+.slogan--schwimmt .slogan__text--zurueck .slogan__zeichen { animation-delay: calc(var(--m) * -0.1s); }
+.slogan--schwimmt .slogan__text--ziel .slogan__zeichen { animation: none; }
+.slogan--schwimmt .slogan__text { animation: none; transform-origin: right center; }
+/* Bläschen hinter den schwimmenden Wörtern (main.js) */
+.blase {
+  position: absolute; z-index: 1; pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.55); border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0) 60%);
+  animation: blase 1.6s ease-out both;
+}
+@keyframes blase {
+  0% { opacity: 0; transform: translate(0, 0) scale(0.4); }
+  20% { opacity: 0.9; }
+  100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.1); }
+}
+/* Kreise auf dem Wasser unter dem Mauszeiger (main.js), kaum sichtbar */
+.kreis {
+  position: absolute; z-index: 1; pointer-events: none;
+  border-radius: 50%; translate: -50% -50%;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  animation: kreis 6s cubic-bezier(.25,.5,.4,1) both;
+}
+/* Größe statt scale animieren, damit die Linie dünn bleibt */
+@keyframes kreis {
+  0% { opacity: 0; width: 6px; height: 6px; }
+  10% { opacity: 1; }
+  100% { opacity: 0; width: 560px; height: 560px; }
+}
+@keyframes kraul {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-0.03em) rotate(-1.5deg); }
+  75% { transform: translateY(0.03em) rotate(1.5deg); }
+}
+
+@media (max-width: 860px) {
+  .hero__raster { grid-template-columns: 1fr; min-height: 0; }
+  .hero__text { padding: 2.5rem var(--rand) 2.25rem; }
+  .slogan__bahn { font-size: min(16vw, 5rem); }
+  .hero .btn-reihe .btn { flex: 1 1 12rem; }
+}
+
+/* ---------- Seitenkopf (Unterseiten) ---------- */
+
+.seitenkopf {
+  position: relative;
+  background: var(--tiefe);
+  color: var(--weiss);
+  overflow: hidden;
+}
+.seitenkopf__raster {
+  display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(1.5rem, 4vw, 4rem); align-items: end;
+  padding-block: clamp(3rem, 7vw, 5.5rem) clamp(2.5rem, 5vw, 4rem);
+}
+.seitenkopf h1 {
+  color: var(--weiss);
+  font-stretch: 62%; font-weight: 850;
+  font-size: clamp(2.8rem, 7vw, 5.6rem);
+  line-height: 0.94;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+.seitenkopf p { color: #d3e0ea; font-size: clamp(1.05rem, 1.4vw, 1.2rem); max-width: 34rem; }
+.seitenkopf .leine { position: absolute; left: 0; right: 0; bottom: 0; }
+.seitenkopf__bild { border-radius: var(--radius); overflow: hidden; aspect-ratio: 4 / 3; }
+.seitenkopf__bild img { width: 100%; height: 100%; object-fit: cover; }
+
+.brotkrumen { font-size: 0.9rem; margin-bottom: 1.25rem; color: #9fb4c5; }
+.brotkrumen ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.brotkrumen li + li::before { content: "/"; margin-right: 0.4rem; color: #5f7a90; }
+.brotkrumen a { color: #cfe0ec; }
+
+@media (max-width: 860px) {
+  .seitenkopf__raster { grid-template-columns: 1fr; }
+  .seitenkopf__bild { aspect-ratio: 16 / 9; }
+}
+
+/* ---------- Abschnitte ---------- */
+
+.abschnitt { padding-block: var(--abstand); }
+.abschnitt--fliese { background: var(--fliese); }
+.abschnitt--tief { background: var(--tiefe); color: #d3e0ea; }
+.abschnitt--tief h2, .abschnitt--tief h3 { color: var(--weiss); }
+
+.kopfzeile { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(1.5rem, 4vw, 4rem); align-items: end; margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+.kopfzeile p { color: var(--grau); }
+.abschnitt--tief .kopfzeile p { color: #b6c8d6; }
+@media (max-width: 760px) { .kopfzeile { grid-template-columns: 1fr; } }
+
+/* Angebote: Schwimmen groß, Rest kleiner */
+.angebot-haupt {
+  display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  background: var(--tiefe); color: #d3e0ea;
+  border-radius: var(--radius); overflow: hidden;
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+}
+.angebot-haupt__bild { position: relative; min-height: 22rem; }
+.angebot-haupt__bild img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.angebot-haupt__text { padding: clamp(1.75rem, 4vw, 3.25rem); display: flex; flex-direction: column; justify-content: center; }
+.angebot-haupt h3 { color: var(--weiss); font-size: clamp(1.9rem, 3.4vw, 2.75rem); margin-bottom: 0.9rem; }
+.angebot-haupt ul { margin: 0 0 1.75rem; padding: 0; list-style: none; }
+.angebot-haupt li { padding: 0.55rem 0; border-bottom: 1px solid rgba(255,255,255,0.12); color: var(--weiss); }
+.angebot-haupt .btn { align-self: flex-start; }
+
+.angebot-paar { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1rem, 2vw, 1.5rem); }
+.angebot {
+  display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  background: var(--weiss); border: 1px solid var(--linie); border-radius: var(--radius); overflow: hidden;
+  color: inherit; text-decoration: none;
+}
+.angebot__bild { position: relative; min-height: 13rem; }
+.angebot__bild img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.angebot__text { padding: 1.5rem 1.5rem 1.6rem; display: flex; flex-direction: column; }
+.angebot__text h3 { margin-bottom: 0.5rem; }
+.angebot__text p { color: var(--grau); font-size: 1rem; }
+.angebot__link { margin-top: auto; padding-top: 0.75rem; font-weight: 650; color: var(--sport-dunkel); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.25em; }
+.angebot:hover .angebot__link { color: var(--tiefe); text-decoration-color: var(--wasser); }
+
+@media (max-width: 960px) {
+  .angebot-haupt { grid-template-columns: 1fr; }
+  .angebot-haupt__bild { min-height: 15rem; }
+  .angebot-paar { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) {
+  .angebot { grid-template-columns: 1fr; }
+  .angebot__bild { min-height: 11rem; }
+}
+
+/* Zielgruppen als Bahnen */
+.bahnen { list-style: none; margin: 0; padding: 0; }
+.bahn {
+  display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 1rem clamp(1.5rem, 4vw, 4rem);
+  padding: clamp(1.5rem, 3vw, 2.25rem) 0;
+  border-top: 1px solid var(--linie);
+}
+.bahn:last-child { border-bottom: 1px solid var(--linie); }
+.bahn h3 { font-size: clamp(1.5rem, 2.6vw, 2.1rem); }
+.bahn p { color: var(--grau); max-width: 40em; }
+@media (max-width: 700px) { .bahn { grid-template-columns: 1fr; } }
+
+/* Über mich */
+.portraet { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(2rem, 5vw, 5rem); align-items: center; }
+.portraet__bild { border-radius: var(--radius); overflow: hidden; aspect-ratio: 4 / 5; }
+.portraet__bild img { width: 100%; height: 100%; object-fit: cover; object-position: 30% 50%; }
+.portraet h2 { margin-bottom: 1.25rem; }
+.fakten { list-style: none; margin: 1.75rem 0 2rem; padding: 0; display: grid; gap: 0.1rem; }
+.fakten li { display: grid; grid-template-columns: 2.25rem 1fr; align-items: start; padding: 0.7rem 0; border-bottom: 1px solid var(--linie); }
+.fakten li::before {
+  content: ""; width: 1.1rem; height: 1.1rem; margin-top: 0.25rem; border-radius: 50%;
+  background: var(--wasser); box-shadow: inset 0 0 0 3px var(--weiss), 0 0 0 1px var(--wasser);
+}
+.fakten strong { color: var(--tiefe); }
+.abschnitt--fliese .fakten li::before { box-shadow: inset 0 0 0 3px var(--fliese), 0 0 0 1px var(--wasser); }
+@media (max-width: 800px) {
+  .portraet { grid-template-columns: 1fr; }
+  .portraet__bild { aspect-ratio: 4 / 3; }
+}
+/* Startseite: Foto vom Becken, Stevan bleibt im Bild */
+.abschnitt--stevan .portraet__bild img { object-position: 50% 60%; }
+@media (max-width: 800px) {
+  .abschnitt--stevan .portraet__bild { aspect-ratio: 1 / 1; }
+  .abschnitt--stevan .portraet__bild img { object-position: 50% 30%; }
+}
+
+/* Ablauf (echte Reihenfolge) */
+.ablauf { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.5rem, 3vw, 2.5rem); counter-reset: schritt; }
+.ablauf li { counter-increment: schritt; position: relative; padding-top: 1.25rem; border-top: 3px solid var(--wasser); }
+.ablauf li::before {
+  content: counter(schritt);
+  display: block;
+  font-stretch: 62%; font-weight: 850; font-size: 3.6rem; line-height: 1;
+  color: var(--wasser);
+  margin-bottom: 0.75rem;
+}
+.ablauf h3 { margin-bottom: 0.6rem; }
+.ablauf p { color: #b6c8d6; }
+.abschnitt:not(.abschnitt--tief) .ablauf p { color: var(--grau); }
+.abschnitt:not(.abschnitt--tief) .ablauf li::before { color: var(--sport); }
+@media (max-width: 800px) { .ablauf { grid-template-columns: 1fr; } }
+
+.hinweis {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding: 1.25rem 1.5rem;
+  border-left: 4px solid var(--wasser);
+  background: rgba(255,255,255,0.06);
+  color: #d3e0ea;
+  max-width: 48rem;
+}
+.abschnitt:not(.abschnitt--tief) .hinweis { background: var(--fliese); color: var(--tinte); }
+.abschnitt--fliese .hinweis { background: var(--weiss); }
+
+/* Einblicke-Streifen */
+.streifen {
+  display: grid; grid-auto-flow: column; grid-auto-columns: minmax(15rem, 1fr);
+  gap: 0.75rem; overflow-x: auto; scroll-snap-type: x mandatory;
+  padding-bottom: 0.5rem;
+  scrollbar-width: thin;
+}
+.streifen figure { margin: 0; scroll-snap-align: start; border-radius: var(--radius); overflow: hidden; aspect-ratio: 3 / 4; }
+.streifen img { width: 100%; height: 100%; object-fit: cover; }
+.streifen figure:nth-child(even) { aspect-ratio: 3 / 4; margin-top: 2.5rem; }
+@media (max-width: 700px) { .streifen figure:nth-child(even) { margin-top: 0; } }
+
+/* FAQ */
+.faq { width: 100%; }
+.faq details { border-top: 1px solid var(--linie); }
+.faq details:last-child { border-bottom: 1px solid var(--linie); }
+.faq summary {
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+  padding: 1.2rem 0; cursor: pointer; list-style: none;
+  font-weight: 650; font-size: 1.15rem; color: var(--tiefe);
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: ""; flex: none; width: 0.75rem; height: 0.75rem;
+  border-right: 2px solid var(--sport); border-bottom: 2px solid var(--sport);
+  transform: rotate(45deg) translate(-2px, -2px); transition: transform 0.2s;
+}
+.faq details[open] summary::after { transform: rotate(225deg) translate(-2px, -2px); }
+.faq details > div { padding: 0 0 1.4rem; color: var(--grau); }
+
+/* Kontakt-Teaser / Formular */
+.kontakt-raster { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(2rem, 5vw, 5rem); }
+.kontakt-raster h2 { margin-bottom: 1.25rem; }
+.kanaele { list-style: none; margin: 2rem 0 0; padding: 0; }
+.kanaele li { padding: 0.9rem 0; border-top: 1px solid rgba(255,255,255,0.14); display: grid; grid-template-columns: 7.5rem 1fr; gap: 1rem; }
+.kanaele li:last-child { border-bottom: 1px solid rgba(255,255,255,0.14); }
+.kanaele span { color: #9fb4c5; }
+.kanaele a { color: var(--weiss); font-weight: 600; }
+.abschnitt:not(.abschnitt--tief) .kanaele li { border-color: var(--linie); }
+.abschnitt:not(.abschnitt--tief) .kanaele span { color: var(--grau); }
+.abschnitt:not(.abschnitt--tief) .kanaele a { color: var(--sport-dunkel); }
+
+.formular {
+  background: var(--weiss); color: var(--tinte);
+  border-radius: var(--radius);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  display: grid; gap: 1.1rem;
+}
+.abschnitt--fliese .formular, .abschnitt:not(.abschnitt--tief) .formular { border: 1px solid var(--linie); }
+.feld { display: grid; gap: 0.35rem; }
+.feld-paar { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+@media (max-width: 560px) { .feld-paar { grid-template-columns: 1fr; } }
+.feld label { font-weight: 600; font-size: 0.95rem; color: var(--tiefe); }
+.feld input, .feld select, .feld textarea {
+  width: 100%;
+  font: inherit; font-size: 1rem; color: var(--tinte);
+  padding: 0.8rem 0.9rem;
+  background: var(--fliese);
+  border: 1px solid #c3d2dd; border-radius: 4px;
+}
+.feld textarea { min-height: 8rem; resize: vertical; }
+.feld input:focus, .feld select:focus, .feld textarea:focus { outline: none; border-color: var(--sport); box-shadow: 0 0 0 3px rgba(22,119,184,0.25); background: var(--weiss); }
+.feld [aria-invalid="true"] { border-color: #c0392b; }
+.feld__fehler { color: #b03223; font-size: 0.9rem; min-height: 0; }
+.zustimmung { display: grid; grid-template-columns: 1.4rem 1fr; gap: 0.6rem; font-size: 0.92rem; color: var(--grau); align-items: start; }
+.zustimmung input { width: 1.15rem; height: 1.15rem; margin-top: 0.2rem; accent-color: var(--sport); }
+.formular .btn { justify-self: start; }
+.formular__info { font-size: 0.9rem; color: var(--grau); }
+.formular__status { padding: 1rem 1.2rem; border-radius: 4px; background: #e3f5f5; color: var(--tiefe); border-left: 4px solid var(--wasser); }
+.formular__status[hidden] { display: none; }
+
+@media (max-width: 860px) { .kontakt-raster { grid-template-columns: 1fr; } }
+
+/* Kursbahnen (Schwimmkurse) */
+.kurse { display: grid; gap: clamp(1rem, 2vw, 1.5rem); }
+.kurs {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  background: var(--weiss); border: 1px solid var(--linie); border-radius: var(--radius); overflow: hidden;
+}
+.kurs__kopf { background: var(--tiefe); color: var(--weiss); padding: clamp(1.5rem, 3vw, 2.25rem); display: flex; flex-direction: column; gap: 0.75rem; position: relative; }
+.kurs__kopf h3 { color: var(--weiss); font-size: clamp(1.7rem, 3vw, 2.3rem); }
+.kurs__kopf p { color: #b6c8d6; }
+.kurs__kopf .leine { margin-top: auto; }
+.kurs__bild { border-radius: 4px; overflow: hidden; aspect-ratio: 4 / 3; margin-top: 0.5rem; }
+.kurs__bild img { width: 100%; height: 100%; object-fit: cover; }
+.kurs__inhalt { padding: clamp(1.5rem, 3vw, 2.25rem); display: grid; gap: 1.25rem; }
+.kurs__daten { display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: 0.75rem 1.5rem; margin: 0; }
+.kurs__daten div { border-top: 2px solid var(--fliese); padding-top: 0.55rem; }
+.kurs__daten dt { font-size: 0.88rem; color: var(--grau); }
+.kurs__daten dd { margin: 0; font-weight: 650; color: var(--tiefe); }
+.kurs__inhalt .btn { justify-self: start; }
+@media (max-width: 760px) { .kurs { grid-template-columns: 1fr; } .kurs__kopf .leine { margin-top: 0.5rem; } .kurs__bild { aspect-ratio: 16 / 9; } }
+
+/* Zwei-Spalten Text + Bild */
+.split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 5rem); align-items: center; }
+.split--umgekehrt .split__bild { order: -1; }
+.split__bild { border-radius: var(--radius); overflow: hidden; aspect-ratio: 3 / 2; }
+.split__bild img { width: 100%; height: 100%; object-fit: cover; }
+.split h2 { margin-bottom: 1.25rem; }
+.split .btn-reihe { margin-top: 1.75rem; }
+@media (max-width: 800px) { .split { grid-template-columns: 1fr; } .split--umgekehrt .split__bild { order: 0; } }
+
+/* Schwerpunkte (Personal Training) */
+.schwerpunkte { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 0; border-top: 1px solid var(--linie); }
+.schwerpunkte > div { padding: 1.75rem 1.5rem 1.75rem 0; border-bottom: 1px solid var(--linie); }
+.schwerpunkte h3 { font-size: 1.45rem; margin-bottom: 0.5rem; }
+.schwerpunkte p { color: var(--grau); font-size: 1rem; }
+
+/* Methode — der Slogan als Arbeitsweise */
+.methode { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.5rem, 3vw, 2.5rem); }
+.methode h3 { font-stretch: 62%; font-weight: 850; text-transform: uppercase; font-size: clamp(2rem, 3.6vw, 2.8rem); letter-spacing: 0.01em; margin: 1rem 0 0.75rem; }
+.methode > div:nth-child(1) h3 { color: var(--weiss); }
+.methode > div:nth-child(2) h3 { color: #bfe9eb; }
+.methode > div:nth-child(3) h3 { color: var(--wasser); }
+@media (max-width: 800px) { .methode { grid-template-columns: 1fr; } }
+
+/* Galerie */
+.galerie { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 0.75rem; }
+.galerie button {
+  display: block; padding: 0; border: 0; background: var(--fliese); cursor: zoom-in;
+  border-radius: var(--radius); overflow: hidden; grid-column: span 4; aspect-ratio: 4 / 3;
+}
+.galerie button:nth-child(6n+1) { grid-column: span 7; aspect-ratio: auto; }
+.galerie button:nth-child(6n+2) { grid-column: span 5; aspect-ratio: auto; }
+.galerie img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+.galerie button:hover img { transform: scale(1.03); }
+@media (max-width: 760px) {
+  .galerie { grid-template-columns: 1fr 1fr; }
+  .galerie button, .galerie button:nth-child(6n+1), .galerie button:nth-child(6n+2) { grid-column: span 1; aspect-ratio: 1; }
+  .galerie button:nth-child(5n+1) { grid-column: span 2; aspect-ratio: 16 / 10; }
+}
+
+.leuchtkasten {
+  border: 0; padding: 0; background: transparent; max-width: min(92vw, 70rem); max-height: 92vh;
+}
+.leuchtkasten::backdrop { background: rgba(10, 26, 42, 0.92); }
+.leuchtkasten img { max-height: 82vh; width: auto; margin-inline: auto; border-radius: 4px; }
+.leuchtkasten p { color: #d3e0ea; text-align: center; margin-top: 0.75rem; }
+.leuchtkasten__zu, .leuchtkasten__nav {
+  position: fixed; background: rgba(255,255,255,0.12); color: var(--weiss); border: 0; border-radius: 999px;
+  width: 3rem; height: 3rem; cursor: pointer; font-size: 1.5rem; line-height: 1; display: grid; place-items: center;
+}
+.leuchtkasten__zu { top: 1rem; right: 1rem; }
+.leuchtkasten__nav--zurueck { left: 1rem; top: 50%; }
+.leuchtkasten__nav--weiter { right: 1rem; top: 50%; }
+.leuchtkasten__zu:hover, .leuchtkasten__nav:hover { background: var(--wasser); color: var(--tiefe); }
+
+/* Karte (Zwei-Klick-Lösung) */
+.karte {
+  position: relative; aspect-ratio: 16 / 9; border-radius: var(--radius); overflow: hidden;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 47px, rgba(255,255,255,0.06) 47px 48px),
+    repeating-linear-gradient(90deg, transparent 0 47px, rgba(255,255,255,0.06) 47px 48px),
+    var(--tiefe);
+  display: grid; place-items: center; text-align: center; color: #d3e0ea; padding: 1.5rem;
+}
+.karte iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.karte p { max-width: 28rem; margin: 0 auto 1rem; font-size: 0.95rem; }
+
+/* Rechtstexte */
+.rechtstext { max-width: 46rem; }
+.rechtstext h2 { font-size: clamp(1.5rem, 2.6vw, 2rem); margin: 2.5rem 0 0.75rem; }
+.rechtstext h2:first-child { margin-top: 0; }
+.platzhalter { background: #fff4d6; padding: 0 0.25em; border-radius: 2px; }
+
+/* CTA-Band */
+.cta-band { background: var(--sport); color: var(--weiss); }
+.cta-band__innen { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem; padding-block: clamp(2.5rem, 5vw, 3.5rem); }
+.cta-band h2 { color: var(--weiss); font-size: clamp(1.8rem, 3.6vw, 2.75rem); max-width: 22ch; }
+.cta-band .btn--primaer { background: var(--weiss); color: var(--tiefe); }
+.cta-band .btn--primaer:hover { background: var(--tiefe); color: var(--weiss); }
+
+/* ---------- Fußzeile ---------- */
+
+.fuss { background: var(--tinte); color: #b6c8d6; font-size: 0.95rem; }
+.fuss__raster { display: grid; grid-template-columns: minmax(0, 4fr) repeat(3, minmax(0, 2fr)); gap: 2rem; padding-block: clamp(3rem, 6vw, 4.5rem) 2.5rem; }
+.fuss h2 { font-size: 1rem; font-stretch: 100%; font-weight: 650; color: var(--weiss); margin-bottom: 0.9rem; letter-spacing: 0; }
+.fuss ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.45rem; }
+.fuss a { color: #dbe6ee; text-decoration: none; }
+.fuss a:hover { color: var(--wasser); text-decoration: underline; }
+.fuss .marke { margin-bottom: 1rem; }
+.fuss__unten { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; padding-block: 1.5rem 2rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.88rem; }
+@media (max-width: 860px) { .fuss__raster { grid-template-columns: 1fr 1fr; } .fuss__raster > :first-child { grid-column: 1 / -1; } }
+
+/* WhatsApp-Schnellknopf (mobil) */
+.wa-schnell {
+  position: fixed; right: 1rem; bottom: 1rem; z-index: 40;
+  width: 3.5rem; height: 3.5rem; border-radius: 50%;
+  display: none; place-items: center;
+  background: #1f9d55; color: var(--weiss);
+  box-shadow: 0 6px 18px rgba(16, 42, 67, 0.3);
+}
+.wa-schnell svg { width: 1.75rem; height: 1.75rem; }
+@media (max-width: 860px) { .wa-schnell { display: grid; } }
+
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+/* ---------- Ergänzungen 10/2026 ---------- */
+
+.dachzeile { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sport); margin: 0 0 0.75rem; }
+.abschnitt--tief .dachzeile { color: var(--wasser); }
+.rolle { font-weight: 650; color: var(--sport-dunkel); margin: 0.6rem 0 1.25rem; }
+.klein { font-size: 0.92rem; color: var(--grau); }
+.portraet .btn-reihe, .split .btn-reihe { margin-top: 1.75rem; }
+
+/* Drei Bereiche auf der Startseite */
+.bereiche { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.5rem); }
+.bereich { display: flex; flex-direction: column; background: var(--weiss); border: 1px solid var(--linie); border-radius: var(--radius); overflow: hidden; }
+.bereich__bild { aspect-ratio: 3 / 2; overflow: hidden; }
+.bereich__bild img { width: 100%; height: 100%; object-fit: cover; }
+.bereich__text { padding: 1.5rem 1.5rem 1.75rem; display: flex; flex-direction: column; flex: 1; }
+.bereich__text h3 { margin-bottom: 0.5rem; }
+.bereich__text > p { color: var(--grau); font-size: 1rem; }
+.bereich__text .btn { margin-top: auto; align-self: flex-start; }
+.bereich__text .haken { margin-bottom: 1.5rem; }
+.bereich:first-child { border-top: 4px solid var(--wasser); }
+@media (max-width: 900px) { .bereiche { grid-template-columns: 1fr; } .bereich__bild { aspect-ratio: 16 / 9; } }
+
+/* Listen mit Haken */
+.haken { list-style: none; margin: 1rem 0; padding: 0; display: grid; gap: 0.45rem; }
+.haken li { position: relative; padding-left: 1.6rem; }
+.haken li::before {
+  content: ""; position: absolute; left: 0.1rem; top: 0.45em; width: 0.8rem; height: 0.45rem;
+  border-left: 2px solid var(--sport); border-bottom: 2px solid var(--sport); transform: rotate(-45deg);
+}
+.haken--spalten { grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); gap: 0.45rem 1.5rem; }
+
+/* Referenzen */
+.referenzen { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.5rem); }
+.referenzen li { border-top: 3px solid var(--wasser); padding-top: 1.25rem; }
+.referenzen strong { display: block; font-stretch: 62%; font-weight: 850; font-size: clamp(2.6rem, 4.4vw, 3.6rem); line-height: 1; color: var(--wasser); margin-bottom: 0.6rem; text-transform: uppercase; }
+.referenzen h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+.referenzen p { color: #b6c8d6; font-size: 0.98rem; }
+.referenzen--hell .referenzen strong { color: var(--sport); }
+.referenzen--hell .referenzen p { color: var(--grau); }
+@media (max-width: 900px) { .referenzen { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .referenzen { grid-template-columns: 1fr; } }
+
+/* Aktuelle Programme */
+.programme { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.5rem); }
+.programme a { display: flex; flex-direction: column; height: 100%; padding: 1.5rem; border: 1px solid var(--linie); border-radius: var(--radius); background: var(--fliese); color: inherit; text-decoration: none; transition: border-color 0.2s; }
+.programme a:hover { border-color: var(--sport); }
+.programme h3 { font-size: 1.45rem; margin: 0.6rem 0 0.5rem; }
+.programme p { color: var(--grau); font-size: 0.98rem; }
+.programme__ort { font-size: 0.82rem; font-weight: 650; color: var(--sport-dunkel); text-transform: uppercase; letter-spacing: 0.06em; }
+.programme .angebot__link { margin-top: auto; }
+@media (max-width: 1000px) { .programme { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .programme { grid-template-columns: 1fr; } }
+
+/* Kacheln (Leistungen) */
+.kacheln { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.5rem); }
+.kacheln a { display: flex; flex-direction: column; height: 100%; padding: 1.5rem; background: var(--weiss); border: 1px solid var(--linie); border-top: 4px solid var(--wasser); border-radius: var(--radius); color: inherit; text-decoration: none; }
+.kacheln a:hover { border-color: var(--sport); }
+.kacheln h2 { font-size: 1.5rem; line-height: 1.1; margin-bottom: 0.5rem; }
+.kacheln p { color: var(--grau); font-size: 0.98rem; }
+.kacheln .angebot__link { margin-top: auto; }
+@media (max-width: 1000px) { .kacheln { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .kacheln { grid-template-columns: 1fr; } }
+.split .kurs__daten { margin-top: 1.5rem; }
+[id] { scroll-margin-top: 5rem; }
+
+/* Über mich */
+.profil { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(2rem, 5vw, 5rem); }
+.fliesstext p + p { margin-top: 1rem; }
+@media (max-width: 860px) { .profil { grid-template-columns: 1fr; } }
+.methode p { color: #b6c8d6; }
+
+/* Leitsatz Schwimmen */
+.leitsatz { background: var(--sport); color: var(--weiss); padding-block: clamp(1.5rem, 3vw, 2.25rem); }
+.leitsatz p { margin: 0; font-stretch: 62%; font-weight: 850; font-size: clamp(1.6rem, 3.6vw, 2.8rem); line-height: 1.05; text-transform: uppercase; letter-spacing: 0.01em; }
+.leitsatz span:nth-child(2) { color: #cdeff0; }
+.leitsatz span:nth-child(3) { color: var(--tiefe); }
+
+/* Hervorgehobener Kurs */
+.kurs--hervor { border: 2px solid var(--wasser); }
+.kurs--hervor .kurs__kopf { background: var(--sport-dunkel); }
+.marke-schwerpunkt { align-self: flex-start; background: var(--wasser); color: var(--tiefe); font-size: 0.78rem; font-weight: 750; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.3rem 0.7rem; border-radius: 999px; }
+.kurs__inhalt .haken { margin: 0; }
+
+/* Orte */
+.orte { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1rem, 2vw, 1.5rem); }
+.ort { border: 1px solid var(--linie); border-radius: var(--radius); overflow: hidden; }
+.ort__bild { aspect-ratio: 16 / 9; }
+.ort__bild img { width: 100%; height: 100%; object-fit: cover; }
+.ort__text { padding: 1.5rem; }
+.ort__text h3 { margin-bottom: 0.5rem; }
+.ort__text p { color: var(--grau); }
+.ort .status { display: inline-block; margin-top: 0.75rem; padding: 0.3rem 0.75rem; border-radius: 999px; background: #e3f5f5; color: var(--tiefe); font-size: 0.88rem; font-weight: 650; }
+@media (max-width: 760px) { .orte { grid-template-columns: 1fr; } }
+
+.hinweis--wichtig { border-left-color: #d9a441; max-width: none; }
+
+/* Galerie */
+.galerie__titel { font-size: clamp(1.6rem, 3vw, 2.2rem); margin: 2.5rem 0 1rem; }
+.galerie__titel:first-child { margin-top: 0; }
+.video-hinweis { margin-top: 2.5rem; padding: 1.5rem; border: 1px dashed var(--linie); border-radius: var(--radius); }
+.video-hinweis h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: 0.5rem; }
+.video-hinweis p { color: var(--grau); }
+
+/* Kontakt */
+.kanaele b { color: var(--weiss); font-weight: 600; }
+.abschnitt:not(.abschnitt--tief) .kanaele b { color: var(--tiefe); }
+.feld small { font-weight: 400; color: var(--grau); }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.formular { position: relative; }
+.fuss__kontakt { margin-top: 1.25rem !important; }
+.fuss__kontakt li { color: #b6c8d6; }
+/* lange E-Mail-Adresse darf auf dem Handy umbrechen, statt die Seite zu verbreitern */
+.kanaele li { grid-template-columns: 7.5rem minmax(0, 1fr); }
+.kanaele a, .fuss a { overflow-wrap: break-word; }
+@media (max-width: 420px) { .kanaele li { grid-template-columns: 5.5rem minmax(0, 1fr); gap: 0.75rem; } }
+.split .klein { margin-top: 1rem; }
+.fuss .marke { display: inline-flex; }
+.seitenkopf h1 { overflow-wrap: anywhere; hyphens: auto; }
+
+/* Erster Abschnitt nach dem Hero: weniger Weiß, damit unter dem ersten Bildschirm keine leere Fläche bleibt */
+.hero + .abschnitt { padding-top: clamp(2.5rem, 5vw, 4rem); }
